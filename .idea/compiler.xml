@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bellatrix.web" />
+        <module name="bellatrix.plugins.video" />
+        <module name="bellatrix.api" />
+        <module name="bellatrix.web.getting.started" />
+        <module name="bellatrix.desktop.tests" />
+        <module name="bellatrix.core" />
+        <module name="bellatrix.android" />
+        <module name="bellatrix.android.tests" />
+        <module name="bellatrix.layout" />
+        <module name="bellatrix.desktop" />
+        <module name="bellatrix.ios.tests" />
+        <module name="bellatrix.web.tests" />
+        <module name="bellatrix.ios" />
+        <module name="bellatrix.plugins.screenshots" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

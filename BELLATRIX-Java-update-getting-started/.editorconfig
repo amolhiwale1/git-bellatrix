@@ -1,0 +1,10 @@
+root = true
+
+[*.java]
+ij_java_blank_lines_around_method_in_interface = 0
+ij_java_field_annotation_wrap = off
+ij_java_keep_simple_blocks_in_one_line = true
+ij_java_space_after_type_cast = false
+
+[*.xml]
+ij_xml_attribute_wrap = off

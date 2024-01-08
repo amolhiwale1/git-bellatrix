@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>solutions.bellatrix</groupId>
+    <artifactId>bellatrix</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>bellatrix.layout</module>
+        <module>bellatrix.core</module>
+        <module>bellatrix.plugins.screenshots</module>
+        <module>bellatrix.plugins.video</module>
+        <module>bellatrix.web</module>
+        <module>bellatrix.desktop</module>
+        <module>bellatrix.android</module>
+        <module>bellatrix.ios</module>
+        <module>bellatrix.api</module>
+        <module>bellatrix.web.tests</module>
+        <module>bellatrix.web.getting.started</module>
+        <module>bellatrix.desktop.tests</module>
+        <module>bellatrix.android.tests</module>
+        <module>bellatrix.ios.tests</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <surefire.testng>2.22.2</surefire.testng>
+        <surefire.junit>3.0.0-M5</surefire.junit>
+
+        <surefire.version>${surefire.junit}</surefire.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <includes>
+                        <include>**/*.class</include>
+                    </includes>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <disableXmlReport>true</disableXmlReport>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

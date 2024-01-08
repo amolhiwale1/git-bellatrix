@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.android.tests/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.android.tests/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.android/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.android/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.desktop.tests/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.desktop.tests/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.desktop/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.desktop/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.ios.tests/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.ios.tests/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.ios/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.ios/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.layout/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.layout/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.plugins.screenshots/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.plugins.screenshots/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.plugins.video/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.plugins.video/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.web.getting.started/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.web.getting.started/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.web.tests/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.web.tests/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/bellatrix.web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BELLATRIX-Java-update-getting-started/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
