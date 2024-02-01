@@ -18,7 +18,7 @@ public class OCS_569 extends OCS_Main {
 
     @BeforeMethod
     public void beforeMethod() {
-        goTo("ven02303");
+        goTo("ven04040");
         login();
     }
 
@@ -35,29 +35,34 @@ public class OCS_569 extends OCS_Main {
         String serialNoUpdated = randomSerial();
         String hostnameUpdated = randomHostName();
         String connectionType = "Wireless - IEEE 802.11";
+
         leftNavigationTable("x_nuvo_eam_ip_address.list");
         app().browser().waitUntilPageLoadsCompletely();
         iFrame();
         clickFormButton("New");
         app().browser().waitUntilPageLoadsCompletely();
+        verifyField("Hostname");
+
         String[] partners = new String[]{"ordr"};
-        // "medigate", "", "paloAlto", "asimily", "cynerio", "medigate", "armis", "medsec"
+        // "medigate", "ordr", "paloAlto", "asimily", "cynerio", "armis", "medsec"
         String[] var14 = partners;
         int var13 = partners.length;
 
         for (String partner : partners) {
-            String payLoad = discoveryPartner(partner, table_name, connectionType, model, ip, mac);
-            String QueueRecord = createRequest("Discovery", payLoad);
-            leftNavigationTable("x_nuvo_cs_discovery_queue.list");
-            leftNavigationTable("x_nuvo_cs_discovery_queue.list");
+//            String payLoad = discoveryPartner(partner, table_name, connectionType, model, ip, mac);
+//            String QueueRecord = createRequest("Discovery", payload(partner));
+            String jsonString= restApiExplorer(payload(partner));
+//            System.out.println(jsonString);
+            String QueueRecord = extractQue(jsonString);
+            openDiscoveryQueue();
             iFrame();
             searchInList("Number", QueueRecord);
             reloadForComplete();
             openDevice();
 
             // verify the IP and MAC address
-            Assert.assertEquals(getFieldValue("IP Addresses"), ip);
-            Assert.assertEquals(getFieldValue("MAC Addresses"), mac);
+            Assert.assertEquals(getFieldValue("IP Addresses"), ip_1);
+            Assert.assertEquals(getFieldValue("MAC Addresses"), mac_1);
 
             // STEP 7 Convert the unmatched device to Clinical, Lab or Facilities (Anything of your choice)
             clickFormButton("Convert to Clinical");
@@ -66,6 +71,8 @@ public class OCS_569 extends OCS_Main {
             // STEP 8 Open the network adapter record from the related list at the bottom
             selectRelatedList("Network Adapters");
             gotoRelatedListRowRecord("Network Adapters", 1);
+
+
 
 
 

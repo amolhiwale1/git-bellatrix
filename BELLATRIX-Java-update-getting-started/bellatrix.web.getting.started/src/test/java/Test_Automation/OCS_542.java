@@ -13,12 +13,14 @@ public class OCS_542 extends MapPolaris {
 
     @BeforeMethod
     public void beforeMethod() {
-        goTo("ven02303");
+        goTo("ven04040");
         login();
     }
 
     public void securityEvent() {
-        polarisLeftMenuNavigation("Security Events", "OT Security");
+        app().browser().waitUntilPageLoadsCompletely();
+        app().browser().waitForAjax();
+        leftNavigationTable("x_nuvo_cs_security_events.list");
         iFrame();
         clickFormButton("New");
         setFieldValue("Name", "securityEvent");
@@ -30,12 +32,12 @@ public class OCS_542 extends MapPolaris {
         hasReletedList("Related Work Orders");
         hasReletedList("Vulnerabilities");
         selectRelatedListVulnerabilities();
-//        hasRelatedListButton("Vulnerabilities", "New Third Party Vulnerability");
-//        hasRelatedListButton("Vulnerabilities", "Edit...");
-//        clickRelatedListButton("Vulnerabilities", "Edit...");
+        hasRelatedListButton("Vulnerabilities", "New Third Party Vulnerability");
+        hasRelatedListButton("Vulnerabilities", "Edit...");
+        clickRelatedListButton("Vulnerabilities", "Edit...");
 
-//        setFieldValue("ID", "123");
-//        clickFormButton("Submit");
+        setFieldValue("ID", "123");
+        clickFormButton("Submit");
     }
 
     @Test

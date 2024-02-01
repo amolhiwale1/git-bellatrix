@@ -94,11 +94,11 @@ public class MapPolaris extends BaseClass {
     }
 
     public Anchor polarisImpersonateButton() {
-        return (Anchor)polarisImpersonationNowModal().shadowRootCreateByCss(WebComponent.class, ".now-line-height-crop").shadowRootCreateByCss(Anchor.class, ".now-button.-primary.-md");
+        return polarisImpersonationNowButton().shadowRootCreateByCss(Anchor.class, "button[class='now-button -primary -md'] slot span[class='now-line-height-crop']");
     }
 
     public TextInput polarisSearchUserInput() {
-        return (TextInput)polarisImpersonationNowPopover().createByCss(TextInput.class, "div > input[placeholder='Search for a user']");
+        return polarisImpersonationNowPopover().createByCss(TextInput.class, "div > input[placeholder='Search for a user']");
     }
 
     public Anchor polarisSelectedUser() {
@@ -127,6 +127,10 @@ public class MapPolaris extends BaseClass {
 
     private WebComponent polarisImpersonationNowModal() {
         return polarisImpersonation().shadowRootCreateByCss(WebComponent.class, "now-modal");
+    }
+
+    private WebComponent polarisImpersonationNowButton() {
+        return polarisImpersonationNowModal().shadowRootCreateByCss(WebComponent.class, "now-button[class='now-modal-footer-button']:nth-child(2)");
     }
 
     private WebComponent polarisImpersonation() {
@@ -217,6 +221,7 @@ public class MapPolaris extends BaseClass {
 
     public void leftNavigationTable(String table) {
         app().browser().switchToDefault();
+        polarisAllElementButton().waitToBe();
         polarisAllElementButton().click();
         polarisMenuShadow().waitToBe();
         polarisMenuShadow().setText(table + "\n");

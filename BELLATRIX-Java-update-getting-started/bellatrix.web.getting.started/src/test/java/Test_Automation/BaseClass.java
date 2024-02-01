@@ -57,6 +57,8 @@ public class BaseClass extends Polaris {
 
     }
 
+
+
     public void form() throws InterruptedException {
         iFrame();
         setFieldValue("asset", "wanda-PC");
@@ -115,7 +117,8 @@ public class BaseClass extends Polaris {
 //    }
 
     public void selectRelatedListVulnerabilities(){
-        Anchor output = (Anchor)app().create().byCss(Anchor.class, "span[class*='last_tab_closure'] span[class='tab_caption_text']");
+        Anchor output = app().create().byCss(Anchor.class, "//span[@class='tab_header']//span[text()='Vulnerabilities']");
+        output.scrollToVisible();
         output.click();
     }
 
@@ -244,6 +247,7 @@ public class BaseClass extends Polaris {
             } else {
                 clickFormContextMenuItem("Reload form");
             }
+            clickFormContextMenuItem("Reload form");
         }
 
     }
@@ -262,5 +266,25 @@ public class BaseClass extends Polaris {
         app().create().byXPath(Anchor.class, "(//*[contains(text(),'" + relatedList
                 + "')]/following::a[contains(@aria-label,'Preview record')]/parent::td)[" + recordNumber + "]").click();
         app().create().byXPath(Anchor.class, "//a[text()='Open Record']").click();
+    }
+
+    public void searchListForNumericValue(String search, String value) {
+        Select identifier = app().create().byXPath(Select.class, "//select[@class='form-control default-focus-outline']");
+        identifier.selectByText(search);
+        app().create().byXPath(TextInput.class, "//input[@placeholder='Search' and contains(@id,'text')]").setText("=" + value + "\n");
+    }
+
+    public void closeMessage() {
+        try{
+            app().create().byXPath(Anchor.class, "//button[@id='close-messages-btn']").click();
+        }
+        catch (Exception e){
+
+        }
+    }
+
+    public void verifyField(String field){
+        TextInput value = app().create().byXPath(TextInput.class, "//input[@aria-label='"+field+"']");
+        value.validateIsVisible();
     }
 }

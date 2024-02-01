@@ -10,6 +10,10 @@ import java.util.Random;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import solutions.bellatrix.web.components.Anchor;
 import solutions.bellatrix.web.components.Select;
 import solutions.bellatrix.web.components.TextInput;
@@ -85,6 +89,16 @@ public class OCS_Main extends MapPolaris {
         return ip.toString();
     }
 
+    String table_name = "x_nuvo_eam_clinical_devices";
+    public String ip_1 = randomip();
+    public String mac_1 = randomMacId();
+    String deviceId_1 = randomString();
+    String serialNo_1 = randomSerial();
+    String thirdParty_1 = randomHostName();
+    String discovery_cynerio = randomHostName();
+    String ordrPayload = "{\r\n    \"source_key\": \"f0b2b1db1be4d810ccdcc91e1e4bcb47\",\r\n    \"device_id\": \"" + deviceId_1 + "\",\r\n    \"table_name\": \"" + table_name + "\",\r\n    \"parameters\": [\r\n        {\r\n            \"third_party_id\": \"" + thirdParty_1 + "\"\r\n        },\r\n        {\r\n            \"ipAddress\": \"" + ip_1 + "\"\r\n        },\r\n        {\r\n            \"macAddress\": \"" + mac_1 + "\"\r\n        },\r\n        {\r\n            \"serial_number\": \"" + serialNo_1 + "\"\r\n        },\r\n        {\r\n            \"model\": \" P3214\"\r\n        },{\r\n            \"hostname\": \"newHostName\"\n" +
+            "        },\r\n        {\r\n            \"deviceDescription\": \"Ultrasound\"\r\n        },\r\n        {\r\n            \"firstSeen\": \"15886803599123\"\r\n        },\r\n        {\r\n            \"isActive\": \"true\"\r\n        },\r\n        {\r\n            \"behaviorState\": \"NORMAL\"\r\n        },\r\n        {\r\n            \"lastSeen\": \"1586803599321\"\r\n        },\r\n        {\r\n            \"manufacturer\": \"GE Healthscare\"\r\n        },\r\n        {\r\n            \"riskScore\": \"0\"\r\n        },\r\n        {\r\n            \"vlan\": \"VLAN0204\"\r\n        },\r\n        {\r\n            \"osType\": \"Linux\"\r\n        },\r\n        {\r\n            \"osVersion\": \"3.29\"\r\n        },\r\n        {\r\n            \"swVersion\": \"L.01.09\"\r\n        },\r\n        {\r\n            \"ssid\": \"cloudpost\"\r\n        },\r\n        {\r\n            \"accessPoint\": \"94:B8:02:7B:A9:6A\"\r\n        },\r\n        {\r\n            \"category\": \"Facility Devices\"\r\n        },\r\n        {\r\n            \"categoryGuid\": \"DG-Facility Devices\"\r\n        },\r\n        {\r\n            \"alarmCount\": \"0\"\r\n        },\r\n        {\r\n            \"interface\":\"NA\"\r\n        },\r\n        {\r\n            \"networkEquipmentHostName\":\"" + discovery_cynerio + "\"\r\n        }\r\n    ],\r\n    \"payload\": \"Ordr Data\"\r\n}";
+
     public String discoveryPartner(String partner, String table_name, String connectionType, String model, String ip_1, String mac_1) {
         String deviceId_1;
         String serialNo_1;
@@ -100,8 +114,7 @@ public class OCS_Main extends MapPolaris {
                 return discovery_cynerio;
             case "medigate":
                 deviceId_1 = randomString();
-                ip_1 = randomip();
-                mac_1 = randomMacId();
+
                 serialNo_1 = randomSerial();
                 thirdParty_1 = randomHostName();
                 discovery_cynerio = randomHostName();
@@ -126,7 +139,8 @@ public class OCS_Main extends MapPolaris {
                 serialNo_1 = randomSerial();
                 thirdParty_1 = randomHostName();
                 discovery_cynerio = randomHostName();
-                discovery_paloAlto = "{\r\n    \"source_key\": \"f0b2b1db1be4d810ccdcc91e1e4bcb47\",\r\n    \"device_id\": \"" + deviceId_1 + "\",\r\n    \"table_name\": \"" + table_name + "\",\r\n    \"parameters\": [\r\n        {\r\n            \"third_party_id\": \"" + thirdParty_1 + "\"\r\n        },\r\n        {\r\n            \"ipAddress\": \"" + ip_1 + "\"\r\n        },\r\n        {\r\n            \"macAddress\": \"" + mac_1 + "\"\r\n        },\r\n        {\r\n            \"serial_number\": \"" + serialNo_1 + "\"\r\n        },\r\n        {\r\n            \"model\": \" P3214\"\r\n        },\r\n        {\r\n            \"deviceDescription\": \"Ultrasound\"\r\n        },\r\n        {\r\n            \"firstSeen\": \"15886803599123\"\r\n        },\r\n        {\r\n            \"isActive\": \"true\"\r\n        },\r\n        {\r\n            \"behaviorState\": \"NORMAL\"\r\n        },\r\n        {\r\n            \"lastSeen\": \"1586803599321\"\r\n        },\r\n        {\r\n            \"manufacturer\": \"GE Healthscare\"\r\n        },\r\n        {\r\n            \"riskScore\": \"0\"\r\n        },\r\n        {\r\n            \"vlan\": \"VLAN0204\"\r\n        },\r\n        {\r\n            \"osType\": \"Linux\"\r\n        },\r\n        {\r\n            \"osVersion\": \"3.29\"\r\n        },\r\n        {\r\n            \"swVersion\": \"L.01.09\"\r\n        },\r\n        {\r\n            \"ssid\": \"cloudpost\"\r\n        },\r\n        {\r\n            \"accessPoint\": \"94:B8:02:7B:A9:6A\"\r\n        },\r\n        {\r\n            \"category\": \"Facility Devices\"\r\n        },\r\n        {\r\n            \"categoryGuid\": \"DG-Facility Devices\"\r\n        },\r\n        {\r\n            \"alarmCount\": \"0\"\r\n        },\r\n        {\r\n            \"interface\":\"NA\"\r\n        },\r\n        {\r\n            \"networkEquipmentHostName\":\"" + discovery_cynerio + "\"\r\n        }\r\n    ],\r\n    \"payload\": \"Ordr Data\"\r\n}";
+                discovery_paloAlto = "{\r\n    \"source_key\": \"f0b2b1db1be4d810ccdcc91e1e4bcb47\",\r\n    \"device_id\": \"" + deviceId_1 + "\",\r\n    \"table_name\": \"" + table_name + "\",\r\n    \"parameters\": [\r\n        {\r\n            \"third_party_id\": \"" + thirdParty_1 + "\"\r\n        },\r\n        {\r\n            \"ipAddress\": \"" + ip_1 + "\"\r\n        },\r\n        {\r\n            \"macAddress\": \"" + mac_1 + "\"\r\n        },\r\n        {\r\n            \"serial_number\": \"" + serialNo_1 + "\"\r\n        },\r\n        {\r\n            \"model\": \" P3214\"\r\n        },{\r\n            \"hostname\": \"newHostName\"\n" +
+                        "        },\r\n        {\r\n            \"deviceDescription\": \"Ultrasound\"\r\n        },\r\n        {\r\n            \"firstSeen\": \"15886803599123\"\r\n        },\r\n        {\r\n            \"isActive\": \"true\"\r\n        },\r\n        {\r\n            \"behaviorState\": \"NORMAL\"\r\n        },\r\n        {\r\n            \"lastSeen\": \"1586803599321\"\r\n        },\r\n        {\r\n            \"manufacturer\": \"GE Healthscare\"\r\n        },\r\n        {\r\n            \"riskScore\": \"0\"\r\n        },\r\n        {\r\n            \"vlan\": \"VLAN0204\"\r\n        },\r\n        {\r\n            \"osType\": \"Linux\"\r\n        },\r\n        {\r\n            \"osVersion\": \"3.29\"\r\n        },\r\n        {\r\n            \"swVersion\": \"L.01.09\"\r\n        },\r\n        {\r\n            \"ssid\": \"cloudpost\"\r\n        },\r\n        {\r\n            \"accessPoint\": \"94:B8:02:7B:A9:6A\"\r\n        },\r\n        {\r\n            \"category\": \"Facility Devices\"\r\n        },\r\n        {\r\n            \"categoryGuid\": \"DG-Facility Devices\"\r\n        },\r\n        {\r\n            \"alarmCount\": \"0\"\r\n        },\r\n        {\r\n            \"interface\":\"NA\"\r\n        },\r\n        {\r\n            \"networkEquipmentHostName\":\"" + discovery_cynerio + "\"\r\n        }\r\n    ],\r\n    \"payload\": \"Ordr Data\"\r\n}";
                 return discovery_paloAlto;
             case "armis":
                 deviceId_1 = randomString();
@@ -151,6 +165,34 @@ public class OCS_Main extends MapPolaris {
         }
 
         throw new IllegalArgumentException("Unexpected value: " + partner);
+    }
+
+    public String payload(String string){
+        return ordrPayload;
+    }
+
+    public String restApiExplorer(String payload){
+        RestAssured.baseURI = "https://ven04040.service-now.com";
+        RestAssured.authentication = RestAssured.basic("Automation.admin", "Nuvolo@2022");
+
+        // Create a request specification
+        RequestSpecification request = RestAssured.given();
+        // Define the request body (JSON data)
+        String requestBody = payload;
+        // Set the request content type
+        request.contentType(ContentType.JSON);
+        // Set the request body
+        request.body(requestBody);
+        // Send a POST request and capture the response
+        Response response = request.post("/api/x_nuvo_cs/otcs/createDiscoveryQueue");
+        // Get the response body as a string
+        String responseBody = response.getBody().asString();
+        // Get the response status code
+        int statusCode = response.getStatusCode();
+        // Print the response
+        System.out.println("Response Body: " + responseBody);
+        System.out.println("Status Code: " + statusCode);
+        return responseBody;
     }
 
     public String getQueueRecordNum(String queue) {
@@ -232,5 +274,23 @@ public class OCS_Main extends MapPolaris {
 
         String queRecord = "QUE" + numericValue;
         return queRecord;
+    }
+
+    public String extractQue(String jsonString) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(jsonString);
+
+        // Extract the message
+        String message = jsonNode.path("result").path("message").asText();
+
+        // Extract only the numeric value
+        String numericValue = message.replaceAll("\\D+", "");
+
+        String queRecord = "QUE" + numericValue;
+        return queRecord;
+    }
+
+    public void openDiscoveryQueue(){
+        leftNavigationTable("x_nuvo_cs_discovery_queue.list");
     }
 }
