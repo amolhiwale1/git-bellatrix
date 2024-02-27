@@ -2,9 +2,13 @@ package Test_Automation;
 
 import java.util.Iterator;
 import java.util.List;
+
+import org.openqa.selenium.interactions.Action;
 import org.testng.Assert;
 import solutions.bellatrix.web.components.*;
 import solutions.bellatrix.web.infrastructure.DriverService;
+
+import javax.swing.*;
 
 public class BaseClass extends Polaris {
 
@@ -56,7 +60,6 @@ public class BaseClass extends Polaris {
         }
 
     }
-
 
 
     public void form() throws InterruptedException {
@@ -116,7 +119,7 @@ public class BaseClass extends Polaris {
 //
 //    }
 
-    public void selectRelatedListVulnerabilities(){
+    public void selectRelatedListVulnerabilities() {
         Anchor output = app().create().byCss(Anchor.class, "//span[@class='tab_header']//span[text()='Vulnerabilities']");
         output.scrollToVisible();
         output.click();
@@ -124,10 +127,10 @@ public class BaseClass extends Polaris {
 
 
     public void selectRelatedList(String list) {
-        if (list.length()==1) {
-            Anchor output = (Anchor)app().create().byXPath(Anchor.class, "//span[text()='" + list + "'][contains(@class,'tab_caption_text')]");
+        if (list.length() == 1) {
+            Anchor output = app().create().byXPath(Anchor.class, "//span[text()='" + list + "'][contains(@class,'tab_caption_text')]");
             output.click();
-        }else {
+        } else {
 
         }
         String[] words = list.split(" ");
@@ -135,7 +138,7 @@ public class BaseClass extends Polaris {
         String[] var7 = words;
         int var6 = words.length;
 
-        for(int var5 = 0; var5 < var6; ++var5) {
+        for (int var5 = 0; var5 < var6; ++var5) {
             String s = var7[var5];
             sb.append("[contains(text(),'" + s + "')]");
         }
@@ -145,16 +148,16 @@ public class BaseClass extends Polaris {
     }
 
     public void hasReletedList(String relatedlistname) {
-        if (relatedlistname.length()==1){
-            Anchor output = (Anchor)app().create().byXPath(Anchor.class, "//span[text()='"+relatedlistname+"'][contains(@class,'tab_caption_text')]");
+        if (relatedlistname.length() == 1) {
+            Anchor output = (Anchor)app().create().byXPath(Anchor.class, "//span[text()='" + relatedlistname + "'][contains(@class,'tab_caption_text')]");
             output.validateIsVisible();
-        }else {
+        } else {
             String[] words = relatedlistname.split(" ");
             StringBuilder sb = new StringBuilder();
             String[] var7 = words;
             int var6 = words.length;
 
-            for(int var5 = 0; var5 < var6; ++var5) {
+            for (int var5 = 0; var5 < var6; ++var5) {
                 String s = var7[var5];
                 sb.append("[contains(text(),'" + s + "')]");
             }
@@ -188,7 +191,7 @@ public class BaseClass extends Polaris {
         List<Anchor> value = app().create().allByXPath(Anchor.class, "//select[contains(@aria-label,'Collection')]//option");
         Iterator var3 = value.iterator();
 
-        while(var3.hasNext()) {
+        while (var3.hasNext()) {
             Anchor slushValue = (Anchor)var3.next();
             if (!slushValue.getText().isBlank()) {
                 addSlushBucketValue(slushValue.getText());
@@ -219,14 +222,45 @@ public class BaseClass extends Polaris {
         app().create().byXPath(Anchor.class, "//a[text()='Open Record']").click();
     }
 
-    public void openDevice() throws InterruptedException {
-                Thread.sleep(5000);
-        app().create().byXPath(Anchor.class, "//a[@id='view.x_nuvo_cs_discovery_queue.target']").waitToBe();
-                clickFormContextMenuItem("Reload form");
+    public void searchList(String visibleText, String searchValue) {
+        Select dropDown = app().create().byXPath(Select.class, "//select[@class='form-control default-focus-outline']");
+        dropDown.selectByText(visibleText);
+        app().create().byXPath(TextInput.class, "//input[@placeholder='Search' and contains(@id,'text')]").setText("*" + searchValue + "\n");
 
-                app().create().byXPath(Anchor.class, "//a[@id='view.x_nuvo_cs_discovery_queue.target']").click();
-                app().create().byXPath(Anchor.class, "//a[text()='Open Record']").waitToBe();
-                app().create().byXPath(Anchor.class, "//a[text()='Open Record']").click();
+    }
+
+    public void searchRecord(int recordNumber) {
+        app().create().byXPath(Anchor.class, "//a[contains(@aria-label,'Preview record')][" + recordNumber + "]").click();
+        app().create().byXPath(Anchor.class, "//a[text()='Open Record']").click();
+    }
+
+    public void openDevice() throws InterruptedException {
+        app().create().byXPath(Anchor.class, "//a[@id='view.x_nuvo_cs_discovery_queue.target']").waitToBe();
+        clickFormContextMenuItem("Reload form");
+
+        app().create().byXPath(Anchor.class, "//a[@id='view.x_nuvo_cs_discovery_queue.target']").click();
+        app().create().byXPath(Anchor.class, "//a[text()='Open Record']").waitToBe();
+        app().create().byXPath(Anchor.class, "//a[text()='Open Record']").click();
+    }
+
+    public boolean checkTargetDevice() throws InterruptedException {
+        Thread.sleep(5000);
+        app().create().byXPath(Anchor.class, "//a[@id='view.x_nuvo_cs_discovery_queue.target']").waitToBe();
+        clickFormContextMenuItem("Reload form");
+
+        return app().create().byXPath(Anchor.class, "//a[@id='view.x_nuvo_cs_discovery_queue.target']").isVisible();
+    }
+
+    public void validateTargetDevice() {
+        clickFormContextMenuItem("Reload form");
+        clickFormContextMenuItem("Reload form");
+        boolean value = app().create().byXPath(Anchor.class, "//a[@id='view.x_nuvo_cs_discovery_queue.target']").isVisible();
+        if (!value) {
+            clickFormContextMenuItem("Reload form");
+        }
+        clickFormContextMenuItem("Reload form");
+
+        app().create().byXPath(Anchor.class, "//a[@id='view.x_nuvo_cs_discovery_queue.target']").validateIsVisible();
     }
 
     public void clickFormContextMenuItem(String visibleText) {
@@ -239,16 +273,45 @@ public class BaseClass extends Polaris {
         return app().create().byXPath(TextInput.class, "//select[contains(@aria-labelledby,'" + label + "')]").getAttribute("value").toString();
     }
 
-    public void reloadForComplete() {
+    public void validateDropdownSelectedValue(String label, String value) {
+        app().create().byXPath(Anchor.class, "//option[@value='" + value + "']/parent::select[contains(@name,'" + label + "')]").validateIsVisible();
+    }
+
+    public void validateSelectedTable(String tableName) {
+        app().create().byXPath(Anchor.class, "(//span[.='" + tableName + "']/ancestor::div[contains(@id,'table_name')])[2]").validateIsVisible();
+    }
+
+    public Anchor validateVisibleTable() {
+        return app().create().byXPath(Anchor.class, "//div[.='Unmatched Devices']");
+    }
+
+    public String validateTargetDeviceValue() {
+        String[] value = getFieldValue("Target").split(":");
+        return value[0];
+    }
+
+    public boolean verifyStateComplete() {
+        return app().create().byXPath(Anchor.class, "//select[contains(@id,'state')]//option[@value='complete']").isVisible();
+    }
+
+    public void reloadFor(String dropDownValue, String value) {
         clickFormContextMenuItem("Reload form");
-        for (int i = 0; i < 3; i++) {
-            if (getDropValue("label.x_nuvo_cs_discovery_queue.state").equals("complete")) {
-                break;
-            } else {
-                clickFormContextMenuItem("Reload form");
-            }
+        clickFormContextMenuItem("Reload form");
+        int k = 1;
+        while (!getDropValue(dropDownValue).equals(value)) {
+
             clickFormContextMenuItem("Reload form");
+            System.out.println(k++);
+            if (k == 20) {
+                app().create().byXPath(Anchor.class,
+                        "//select[contains(@id,'state')]//option[@value='complete']").validateIsVisible();
+                System.out.println(dropDownValue + " is going in pending state");
+                break;
+            }
         }
+        app().create().byXPath(Anchor.class,
+                "//select[contains(@id," + dropDownValue + ")]//option[@value='" + value + "']").validateIsVisible();
+
 
     }
 
@@ -262,10 +325,43 @@ public class BaseClass extends Polaris {
     }
 
     public void gotoRelatedListRowRecord(String relatedList, int recordNumber) {
+        try {
+            selectRelatedList(relatedList);
+            app().create().byXPath(Anchor.class, "(//*[contains(text(),'" + relatedList
+                    + "')]/following::a[contains(@aria-label,'Preview record')]/parent::td)[" + recordNumber + "]").click();
+            app().create().byXPath(Anchor.class, "//a[text()='Open Record']").click();
+
+        } catch (Exception e) {
+            System.out.println("There is no record created");
+        }
+
+
+
+}
+
+    public void goToRelatedRecordBy(String relatedList,String value){
         selectRelatedList(relatedList);
-        app().create().byXPath(Anchor.class, "(//*[contains(text(),'" + relatedList
-                + "')]/following::a[contains(@aria-label,'Preview record')]/parent::td)[" + recordNumber + "]").click();
+        app().create().byXPath(Anchor.class,
+                "//td[normalize-space()='"+value+"']/preceding-sibling::td[contains(@class,'list_decoration_cell')]/child::a").click();
         app().create().byXPath(Anchor.class, "//a[text()='Open Record']").click();
+    }
+
+    public void scrollRelatedElement() {
+        app().create().byXPath(Anchor.class, "(//a[contains(@class, 'list_filter_toggle')])[1]").scrollToVisible();
+    }
+
+    public String searchQueueParameter(String searchValue) {
+        String value = searchValue;
+        value.contains(searchValue);
+        selectRelatedList("Queue Parameters");
+        scrollRelatedElement();
+        app().create().byXPath(Select.class, "//select[@aria-label='Search a specific field of the Queue Parameters list']").selectByText("Key");
+        app().create().byXPath(TextInput.class, "(//input[@placeholder='Search'])[1]").setText("*" + searchValue + "\n");
+        return app().create().byXPath(Anchor.class, "(//a[normalize-space()='" + searchValue + "']/parent::td[@class='vt']/following-sibling::td)[1]").getText();
+    }
+
+    public void validateQueueParameter(String searchValue, String value) {
+        Assert.assertEquals(searchQueueParameter(searchValue), value);
     }
 
     public void searchListForNumericValue(String search, String value) {
@@ -275,16 +371,46 @@ public class BaseClass extends Polaris {
     }
 
     public void closeMessage() {
-        try{
+        try {
             app().create().byXPath(Anchor.class, "//button[@id='close-messages-btn']").click();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
 
-    public void verifyField(String field){
-        TextInput value = app().create().byXPath(TextInput.class, "//input[@aria-label='"+field+"']");
+    public void verifyField(String field) {
+        TextInput value = app().create().byXPath(TextInput.class, "//input[@aria-label='" + field + "']");
         value.validateIsVisible();
     }
+
+    public String verifyFieldValue(String field) {
+        return app().create().byXPath(TextInput.class, "//input[@aria-label='" + field + "']").getAttribute("value");
+    }
+
+    public void selectSectionTab(String tab) {
+        app().create().byXPath(Anchor.class, "//span[normalize-space()='" + tab + "']").click();
+    }
+
+    public void verifySectionTabValue(String tab, String address1, String address2) {
+        String count = app().create().byXPath(Anchor.class, "//textarea[@aria-label='" + tab + "']/preceding-sibling::input").getAttribute("value");
+        String[] address = count.split(",");
+        String ad1 = address[0];
+        String ad2 = address[1];
+
+        System.out.println("Need to compare the " + ad1 + " with " + address1);
+        Assert.assertEquals(ad1, address1);
+        System.out.println("Need to compare the " + ad2 + " with " + address2);
+        Assert.assertEquals(ad2, address2);
+    }
+
+    public void verifySectionTabValue(String tab, String address) {
+        String count = app().create().byXPath(Anchor.class, "//textarea[@aria-label='" + tab + "']/preceding-sibling::input").getAttribute("value");
+        Assert.assertEquals(count, address);
+    }
+
+    public void backButton() {
+        app().create().byXPath(Anchor.class, "//button[@aria-label='Back']").click();
+    }
+
+
 }

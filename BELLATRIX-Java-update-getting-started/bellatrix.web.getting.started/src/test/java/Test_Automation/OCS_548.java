@@ -10,7 +10,7 @@ public class OCS_548 extends OCS_Main{
 
     @BeforeMethod
     public void beforeMethod() {
-        goTo("ven02303");
+        goTo("ven04040");
         login();
     }
 
@@ -42,10 +42,9 @@ public class OCS_548 extends OCS_Main{
             String QueueRecord = createRequest("Discovery", payLoad);
 
             leftNavigationTable("x_nuvo_cs_discovery_queue.list");
-            leftNavigationTable("x_nuvo_cs_discovery_queue.list");
             iFrame();
             searchInList("Number", QueueRecord);
-            reloadForComplete();
+            reloadFor("label.x_nuvo_cs_discovery_queue.state", "complete");
             String tapPartner = partner + " - Create Device";
             Assert.assertEquals(getFieldValue("action_script").toLowerCase(), tapPartner.toLowerCase());
 //            Assert.assertEquals(getFieldValue("Target"), getFieldValue("Target").contains("Unmatched Devices"));
